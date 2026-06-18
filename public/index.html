@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Core Diesel — Meta Ad Creative Brief</title>
+<style>
+  :root {
+    --orange: #E8631A;
+    --dark: #1A1A1A;
+    --mid: #444;
+    --muted: #888;
+    --light: #f5f3ee;
+    --border: #e0ddd8;
+    --white: #ffffff;
+    --green: #1a6b3a;
+    --red: #a33030;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #f9f8f5; color: var(--dark); line-height: 1.6; font-size: 15px; }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--dark); color: white;
+    display: flex; align-items: center; gap: 0;
+    padding: 0 1.5rem; height: 52px;
+    border-bottom: 3px solid var(--orange);
+  }
+  .nav-logo { font-weight: 800; font-size: 15px; color: var(--orange); letter-spacing: 0.02em; margin-right: 2rem; white-space: nowrap; }
+  .nav-links { display: flex; gap: 0; overflow-x: auto; flex: 1; }
+  .nav-links a { color: #aaa; text-decoration: none; font-size: 12px; font-weight: 500; padding: 0 0.875rem; height: 52px; display: flex; align-items: center; white-space: nowrap; border-bottom: 2px solid transparent; transition: color 0.15s, border-color 0.15s; }
+  .nav-links a:hover, .nav-links a.active { color: white; border-bottom-color: var(--orange); }
+  .nav-tag { margin-left: auto; font-size: 11px; color: #666; white-space: nowrap; padding-left: 1rem; }
+
+  /* ── LAYOUT ── */
+  .page { max-width: 960px; margin: 0 auto; padding: 2.5rem 1.5rem 5rem; }
+
+  /* ── COVER ── */
+  .cover { text-align: center; padding: 3rem 1rem 2.5rem; border-bottom: 1px solid var(--border); margin-bottom: 3rem; }
+  .cover-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--orange); margin-bottom: 0.75rem; }
+  .cover h1 { font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 900; color: var(--dark); line-height: 1.0; margin-bottom: 0.5rem; }
+  .cover h1 span { color: var(--orange); }
+  .cover-sub { font-size: 1rem; color: var(--muted); margin-bottom: 1.5rem; }
+  .cover-pills { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; }
+  .pill { font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 20px; background: var(--light); color: var(--mid); border: 1px solid var(--border); }
+  .pill.orange { background: var(--orange); color: white; border-color: var(--orange); }
+
+  /* ── SECTION HEADERS ── */
+  .campaign-header { background: var(--dark); color: white; padding: 1rem 1.5rem; border-radius: 10px; margin: 3rem 0 2rem; display: flex; align-items: center; gap: 1rem; }
+  .campaign-header .camp-letter { font-size: 2rem; font-weight: 900; color: var(--orange); line-height: 1; }
+  .campaign-header .camp-title { font-size: 1.1rem; font-weight: 700; }
+  .campaign-header .camp-sub { font-size: 12px; color: #aaa; margin-top: 2px; }
+
+  .section-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--orange); margin-bottom: 0.75rem; margin-top: 2.5rem; }
+  h2 { font-size: 1.3rem; font-weight: 700; color: var(--dark); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--orange); }
+  h3 { font-size: 1rem; font-weight: 700; color: var(--dark); margin: 1.5rem 0 0.5rem; }
+  p { color: var(--mid); margin-bottom: 0.75rem; }
+
+  /* ── PHOTO GRID ── */
+  .photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem; margin: 1.5rem 0; }
+  .photo-card { background: white; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .photo-card img { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; }
+  .photo-card.portrait img { aspect-ratio: 3/4; }
+  .photo-card .photo-meta { padding: 0.75rem; }
+  .photo-id { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; color: var(--orange); text-transform: uppercase; margin-bottom: 3px; }
+  .photo-title { font-size: 13px; font-weight: 600; color: var(--dark); margin-bottom: 4px; }
+  .photo-desc { font-size: 12px; color: var(--muted); line-height: 1.4; margin: 0; }
+  .star-row { display: flex; gap: 2px; margin: 4px 0; }
+  .star { font-size: 11px; color: var(--orange); }
+  .star.empty { color: var(--border); }
+  .use-badge { display: inline-block; font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 4px; background: #fff3eb; color: var(--orange); border: 1px solid #fdd0b0; margin-top: 4px; }
+
+  /* ── CONCEPT CARDS ── */
+  .concept-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; margin: 1.5rem 0; }
+  .concept-card { background: white; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .concept-card-header { background: var(--orange); color: white; padding: 0.625rem 0.875rem; display: flex; align-items: center; gap: 0.5rem; }
+  .concept-id { font-size: 11px; font-weight: 800; letter-spacing: 0.05em; background: rgba(0,0,0,0.2); padding: 2px 7px; border-radius: 4px; }
+  .concept-name { font-size: 13px; font-weight: 600; }
+  .concept-format { font-size: 10px; color: rgba(255,255,255,0.7); margin-left: auto; white-space: nowrap; }
+  .concept-card img { width: 100%; aspect-ratio: 4/5; object-fit: cover; display: block; }
+  .concept-card .concept-body { padding: 0.875rem; }
+  .concept-card .concept-body p { font-size: 12px; color: var(--mid); margin-bottom: 0.5rem; }
+  .concept-card .concept-body p:last-child { margin: 0; }
+
+  /* ── NATIVE AD CARDS ── */
+  .native-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; margin: 1.5rem 0; }
+  .native-card { background: white; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .native-card-header { background: var(--dark); color: white; padding: 0.625rem 0.875rem; display: flex; align-items: center; gap: 0.5rem; }
+  .native-format-tag { font-size: 10px; padding: 2px 7px; background: rgba(232,99,26,0.3); border-radius: 4px; color: var(--orange); font-weight: 600; margin-left: auto; white-space: nowrap; }
+  .native-card-creative { padding: 0.75rem; background: #1a1a1a; }
+  .native-card-creative.light { background: #f5f3ee; }
+  .native-card-copy { padding: 0.75rem; border-top: 1px solid var(--border); }
+  .copy-primary { font-size: 12px; color: var(--dark); line-height: 1.4; margin-bottom: 0.5rem; }
+  .copy-chips { display: flex; gap: 5px; flex-wrap: wrap; }
+  .chip { font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 4px; background: var(--light); color: var(--muted); border: 1px solid var(--border); }
+  .chip.cta { background: var(--orange); color: white; border-color: var(--orange); }
+
+  /* ── COPY BLOCKS ── */
+  .copy-blocks { display: grid; grid-template-columns: 1fr; gap: 1rem; margin: 1.5rem 0; }
+  .copy-block { background: white; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .copy-block-header { background: var(--light); padding: 0.625rem 0.875rem; display: flex; align-items: center; gap: 0.5rem; border-bottom: 1px solid var(--border); }
+  .copy-block-id { font-size: 11px; font-weight: 800; color: var(--orange); }
+  .copy-block-name { font-size: 12px; font-weight: 600; color: var(--dark); }
+  .copy-block-body { padding: 0.875rem; display: grid; grid-template-columns: 1fr 1fr; gap: 0.875rem; }
+  @media (max-width: 600px) { .copy-block-body { grid-template-columns: 1fr; } }
+  .copy-field { }
+  .copy-field label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); display: block; margin-bottom: 3px; }
+  .copy-field p { font-size: 12px; color: var(--dark); line-height: 1.4; margin: 0; background: var(--light); padding: 6px 8px; border-radius: 5px; border: 1px solid var(--border); }
+  .copy-field.full { grid-column: 1 / -1; }
+  .copy-meta-row { display: flex; gap: 0.5rem; flex-wrap: wrap; padding: 0.625rem 0.875rem; border-top: 1px solid var(--border); background: var(--light); }
+  .meta-item { font-size: 11px; color: var(--muted); }
+  .meta-item strong { color: var(--dark); }
+
+  /* ── NATIVE MOCKUPS ── */
+
+  /* Notes */
+  .notes-frame { background: #1c1c1e; border-radius: 14px; padding: 10px; max-width: 280px; margin: 0 auto; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif; }
+  .notes-statusbar { display: flex; justify-content: space-between; font-size: 10px; font-weight: 600; color: #fff; padding: 2px 4px 5px; }
+  .notes-nav { font-size: 12px; color: #ff9f0a; padding: 0 4px 7px; }
+  .notes-date { text-align: center; font-size: 10px; color: #8e8e93; margin-bottom: 7px; }
+  .notes-title { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 7px; padding: 0 4px; line-height: 1.25; }
+  .notes-body { font-size: 12px; color: #fff; line-height: 1.5; padding: 0 4px; }
+  .notes-body .hi { background: #ff9f0a; color: #1c1c1e; padding: 0 2px; border-radius: 2px; }
+  .notes-item { display: flex; gap: 5px; margin-bottom: 5px; align-items: flex-start; }
+  .notes-bullet { color: #ff9f0a; flex-shrink: 0; margin-top: 1px; }
+  .notes-url { font-size: 10px; color: #8e8e93; padding: 7px 4px 2px; border-top: 0.5px solid #38383a; margin-top: 7px; }
+  .notes-cursor { display: inline-block; width: 2px; height: 11px; background: #ff9f0a; vertical-align: middle; animation: blink 1s step-end infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* Whiteboard */
+  .wb-frame { background: #f5f2eb; border: 5px solid #d6cfc2; border-radius: 6px; padding: 12px; max-width: 280px; margin: 0 auto; font-family: 'Segoe Print', 'Comic Sans MS', cursive; }
+  .wb-title { font-size: 13px; font-weight: 700; color: #1a1614; margin-bottom: 3px; }
+  .wb-sub { font-size: 9px; color: #8a7e6b; margin-bottom: 8px; }
+  .wb-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 10px; }
+  .wb-table th { padding: 4px 5px; font-weight: 700; border-bottom: 2px solid #1a1614; text-align: center; }
+  .wb-table th.us { color: #1a6b3a; } .wb-table th.them { color: #a33030; }
+  .wb-table td { padding: 3px 5px; border-bottom: 1px dashed #ccc5b5; color: #4a3f2f; font-size: 9.5px; }
+  .wb-table td.lbl { font-weight: 700; color: #1a1614; }
+  .win { color: #1a6b3a; text-align: center; }
+  .lose { color: #a33030; text-decoration: line-through; text-align: center; }
+  .wb-foot { font-size: 8px; color: #8a7e6b; text-align: center; margin-top: 7px; }
+
+  /* Google */
+  .gs-frame { background: #202124; border-radius: 12px; padding: 10px; max-width: 280px; margin: 0 auto; font-family: Arial, sans-serif; }
+  .gs-bar { background: #303134; border-radius: 18px; padding: 7px 11px; display: flex; align-items: center; gap: 7px; margin-bottom: 9px; }
+  .gs-q { font-size: 12px; color: #e8eaed; flex: 1; }
+  .gs-tabs { display: flex; gap: 0; margin-bottom: 9px; border-bottom: 0.5px solid #3c4043; }
+  .gs-tab { font-size: 10px; padding: 3px 9px; color: #9aa0a6; }
+  .gs-tab.on { color: #8ab4f8; border-bottom: 2px solid #8ab4f8; }
+  .gs-paa { background: #303134; border-radius: 5px; padding: 7px 9px; margin-bottom: 5px; font-size: 10px; color: #e8eaed; display: flex; justify-content: space-between; }
+  .gs-paa-lbl { font-size: 8px; color: #9aa0a6; margin-bottom: 5px; }
+  .gs-result { margin-top: 8px; }
+  .gs-url { font-size: 9px; color: #9aa0a6; margin-bottom: 1px; }
+  .gs-rtitle { font-size: 12px; color: #8ab4f8; line-height: 1.3; margin-bottom: 2px; }
+  .gs-rdesc { font-size: 10px; color: #bdc1c6; line-height: 1.3; }
+
+  /* Receipt */
+  .receipt-frame { background: #fff; max-width: 210px; margin: 0 auto; padding: 12px 10px; font-family: 'Courier New', monospace;
+    clip-path: polygon(0 3%, 3% 0, 6% 3%, 9% 0, 12% 3%, 15% 0, 18% 3%, 21% 0, 24% 3%, 27% 0, 30% 3%, 33% 0, 36% 3%, 39% 0, 42% 3%, 45% 0, 48% 3%, 51% 0, 54% 3%, 57% 0, 60% 3%, 63% 0, 66% 3%, 69% 0, 72% 3%, 75% 0, 78% 3%, 81% 0, 84% 3%, 87% 0, 90% 3%, 93% 0, 96% 3%, 100% 0, 100% 95%, 97% 100%, 94% 95%, 91% 100%, 88% 95%, 85% 100%, 82% 95%, 79% 100%, 76% 95%, 73% 100%, 70% 95%, 67% 100%, 64% 95%, 61% 100%, 58% 95%, 55% 100%, 52% 95%, 49% 100%, 46% 95%, 43% 100%, 40% 95%, 37% 100%, 34% 95%, 31% 100%, 28% 95%, 25% 100%, 22% 95%, 19% 100%, 16% 95%, 13% 100%, 10% 95%, 7% 100%, 4% 95%, 1% 100%, 0 95%); }
+  .rh { text-align: center; font-size: 11px; font-weight: 700; color: #1a1a1a; margin-bottom: 2px; }
+  .rs { text-align: center; font-size: 8px; color: #555; margin-bottom: 7px; }
+  .rd { border: none; border-top: 1px dashed #ccc; margin: 5px 0; }
+  .rr { display: flex; justify-content: space-between; font-size: 9px; color: #333; margin-bottom: 2px; }
+  .rr.strike { text-decoration: line-through; color: #a33030; }
+  .rr.total { font-weight: 700; font-size: 11px; color: #1a1a1a; margin-top: 3px; }
+  .rr.orange { color: var(--orange); font-weight: 700; font-size: 10px; }
+  .rnote { font-size: 8px; color: #777; text-align: center; margin-top: 7px; line-height: 1.4; }
+
+  /* Open Letter */
+  .letter-frame { background: #fefcf3; border-radius: 3px; max-width: 280px; margin: 0 auto; padding: 14px 12px 0;
+    clip-path: polygon(0 0, 100% 0, 100% 88%, 98% 90%, 96% 88%, 94% 92%, 92% 88%, 90% 91%, 88% 88%, 86% 92%, 84% 88%, 82% 91%, 80% 88%, 78% 92%, 76% 88%, 74% 91%, 72% 88%, 70% 92%, 68% 88%, 66% 91%, 64% 88%, 62% 92%, 60% 88%, 58% 91%, 56% 88%, 54% 92%, 52% 88%, 50% 91%, 48% 88%, 46% 92%, 44% 88%, 42% 91%, 40% 88%, 38% 92%, 36% 88%, 34% 91%, 32% 88%, 30% 92%, 28% 88%, 26% 91%, 24% 88%, 22% 92%, 20% 88%, 18% 91%, 16% 88%, 14% 92%, 12% 88%, 10% 91%, 8% 88%, 6% 92%, 4% 88%, 2% 91%, 0 88%);
+    background-image: repeating-linear-gradient(transparent, transparent 21px, rgba(180,160,100,0.18) 21px, rgba(180,160,100,0.18) 22px);
+    font-family: Georgia, serif; }
+  .ltopbar { height: 4px; background: var(--orange); margin: -14px -12px 10px; border-radius: 3px 3px 0 0; }
+  .ltag { font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--orange); font-family: -apple-system, sans-serif; margin-bottom: 5px; }
+  .lsal { font-size: 13px; font-weight: 700; color: #2a2218; margin-bottom: 5px; }
+  .lbody { font-size: 11px; color: #4a3f2f; line-height: 1.45; margin-bottom: 5px; }
+  .lhi { background: #fef08a; padding: 0 2px; }
+  .lside { font-style: italic; color: #8a7e6b; }
+  .lsig { margin-top: 9px; border-top: 0.5px solid #ccc5b5; padding: 7px 0 26px; }
+  .lsig-name { font-size: 12px; font-style: italic; font-weight: 700; color: #2a2218; }
+  .lsig-title { font-size: 9px; color: #8a7e6b; font-family: -apple-system, sans-serif; }
+
+  /* Sticky board */
+  .sticky-board { background: #2c2825; border-radius: 8px; padding: 12px; max-width: 280px; margin: 0 auto; }
+  .sticky-board-title { font-size: 9px; color: #a89880; text-align: center; margin-bottom: 9px; font-family: 'Segoe Print', cursive; }
+  .sticky-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+  .sticky { padding: 7px; border-radius: 2px; font-family: 'Segoe Print', 'Comic Sans MS', cursive; font-size: 10px; line-height: 1.35; position: relative; box-shadow: 2px 3px 6px rgba(0,0,0,0.25); }
+  .sticky::before { content: ''; display: block; width: 9px; height: 9px; border-radius: 50%; position: absolute; top: -4px; left: 50%; transform: translateX(-50%); }
+  .sticky.y { background: #fef08a; color: #422006; } .sticky.y::before { background: #d4a017; }
+  .sticky.b { background: #a5f3fc; color: #083344; } .sticky.b::before { background: #0891b2; }
+  .sticky.o { background: #fed7aa; color: #431407; } .sticky.o::before { background: #ea580c; }
+  .sticky.g { background: #86efac; color: #052e16; } .sticky.g::before { background: #16a34a; }
+  .sticky-head { font-weight: 700; margin-bottom: 2px; font-size: 11px; }
+  .sticky-foot { margin-top: 9px; text-align: center; font-size: 8px; color: #a89880; font-family: -apple-system, sans-serif; }
+
+  /* iMessage */
+  .imsg-frame { background: #000; border-radius: 14px; padding: 9px; max-width: 270px; margin: 0 auto; font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
+  .imsg-status { display: flex; justify-content: space-between; font-size: 10px; font-weight: 600; color: #fff; padding: 2px 4px 7px; }
+  .imsg-header { display: flex; align-items: center; gap: 7px; padding: 0 4px 9px; border-bottom: 0.5px solid #1c1c1e; margin-bottom: 9px; }
+  .imsg-back { font-size: 12px; color: #007aff; }
+  .imsg-avatar { width: 26px; height: 26px; border-radius: 50%; background: #3a3a3c; display: flex; align-items: center; justify-content: center; font-size: 11px; color: #fff; font-weight: 600; }
+  .imsg-name { font-size: 12px; color: #fff; font-weight: 500; }
+  .imsg-ts { font-size: 9px; color: #8e8e93; text-align: center; margin-bottom: 7px; }
+  .imsg-them { background: #1c1c1e; border-radius: 14px 14px 14px 4px; padding: 7px 9px; max-width: 78%; font-size: 11px; color: #fff; margin-bottom: 5px; line-height: 1.35; }
+  .imsg-me { background: #007aff; border-radius: 14px 14px 4px 14px; padding: 7px 9px; max-width: 78%; font-size: 11px; color: #fff; margin-bottom: 5px; margin-left: auto; line-height: 1.35; }
+  .imsg-read { font-size: 9px; color: #8e8e93; text-align: right; margin-top: -3px; margin-bottom: 5px; padding-right: 4px; }
+  .imsg-home { width: 36px; height: 4px; background: #fff; border-radius: 2px; margin: 9px auto 0; }
+
+  /* ── COMPLIANCE ── */
+  .compliance-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+  @media (max-width: 600px) { .compliance-grid { grid-template-columns: 1fr; } }
+  .compliance-card { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 1rem; }
+  .compliance-card h3 { margin-top: 0; font-size: 13px; }
+  .compliance-list { list-style: none; margin-top: 0.75rem; }
+  .compliance-list li { font-size: 12px; color: var(--mid); padding: 5px 0; border-bottom: 1px solid var(--light); line-height: 1.4; display: flex; gap: 6px; align-items: flex-start; }
+  .compliance-list li:last-child { border-bottom: none; }
+  .compliance-list li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+  .compliance-list li.warn::before { content: '⚠'; color: #c47c00; }
+  .compliance-list li.flag::before { content: '⚑'; color: var(--orange); }
+
+  /* ── MISC ── */
+  .divider { height: 1px; background: var(--border); margin: 2.5rem 0; }
+  .note { font-size: 12px; color: var(--muted); background: var(--light); border-left: 3px solid var(--orange); padding: 0.75rem 1rem; border-radius: 0 6px 6px 0; margin: 1rem 0; }
+  .footer { text-align: center; padding: 2rem 0; font-size: 12px; color: var(--muted); border-top: 1px solid var(--border); margin-top: 3rem; }
+  .back-to-top { position: fixed; bottom: 1.5rem; right: 1.5rem; background: var(--dark); color: white; border: none; border-radius: 50%; width: 40px; height: 40px; font-size: 18px; cursor: pointer; opacity: 0; transition: opacity 0.2s; display: flex; align-items: center; justify-content: center; text-decoration: none; }
+  .back-to-top.visible { opacity: 1; }
+
+  @media (max-width: 600px) {
+    .concept-grid, .native-grid, .photo-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="top">
+  <div class="nav-logo">CORE DIESEL</div>
+  <div class="nav-links">
+    <a href="#photography">Photography</a>
+    <a href="#camp-a-concepts">Campaign A Concepts</a>
+    <a href="#camp-a-native">Campaign A Native</a>
+    <a href="#camp-a-copy">Campaign A Copy</a>
+    <a href="#camp-b-concepts">Campaign B Concepts</a>
+    <a href="#camp-b-native">Campaign B Native</a>
+    <a href="#camp-b-copy">Campaign B Copy</a>
+    <a href="#compliance">Compliance</a>
+  </div>
+  <div class="nav-tag">Meta Ad Creative Brief · June 2026</div>
+</nav>
+
+<div class="page">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-eyebrow">Meta Ad Creative Brief · June 2026</div>
+    <h1><span>Core</span>Diesel</h1>
+    <div class="cover-sub">Campaign A: Heavy Vehicle Department &nbsp;·&nbsp; Campaign B: Open Day / New Facility</div>
+    <div class="cover-pills">
+      <span class="pill orange">10 photo concepts</span>
+      <span class="pill orange">7 native formats</span>
+      <span class="pill">Full Meta copy</span>
+      <span class="pill">Image-gen prompts</span>
+      <span class="pill">Compliance notes</span>
+      <span class="pill">Hedgehog Marketing</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- PHOTOGRAPHY SELECTIONS                                  -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div id="photography">
+    <div class="section-label">Section 1</div>
+    <h2>Recommended Photography</h2>
+    <p>All supplied images reviewed. Below are the picks — rated by ad impact and tagged to their concept.</p>
+
+    <div class="campaign-header">
+      <div class="camp-letter">A</div>
+      <div>
+        <div class="camp-title">Campaign A — Heavy Vehicle Department</div>
+        <div class="camp-sub">5 images supplied · all usable · ranked by impact</div>
+      </div>
+    </div>
+
+    <div class="photo-grid">
+      <div class="photo-card">
+        <img src="hv_kenworth_engine.jpg" alt="Rebuilt Cummins engine with Kenworth">
+        <div class="photo-meta">
+          <div class="photo-id">HV-1</div>
+          <div class="star-row"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+          <div class="photo-title">Kenworth + Rebuilt Cummins Engine</div>
+          <p class="photo-desc">A fully rebuilt Cummins engine on a pallet on the workshop floor, Kenworth behind it. The strongest creative asset in both sets — no competitor can run this image.</p>
+          <span class="use-badge">→ Hero for concept A2</span>
+        </div>
+      </div>
+      <div class="photo-card">
+        <img src="hv_rotary_lift.jpg" alt="Truck on Rotary Lifts" style="aspect-ratio:3/4">
+        <div class="photo-meta">
+          <div class="photo-id">HV-2</div>
+          <div class="star-row"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+          <div class="photo-title">Truck on Rotary Lifts</div>
+          <p class="photo-desc">Commercial truck elevated on red Rotary Lift columns. Demonstrates HV hoist capability. Dramatic angle reads well on mobile.</p>
+          <span class="use-badge">→ Concept A4</span>
+        </div>
+      </div>
+      <div class="photo-card">
+        <img src="hv_brake_shaker.jpg" alt="Isuzu on brake shaker" style="aspect-ratio:3/4">
+        <div class="photo-meta">
+          <div class="photo-id">HV-3</div>
+          <div class="star-row"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star empty">★</span></div>
+          <div class="photo-title">Isuzu on Brake Shaker Pit</div>
+          <p class="photo-desc">Isuzu truck over the NHVR-approved brake shaker test unit. The only direct visual of the most differentiating credential.</p>
+          <span class="use-badge">→ Concept A1 + CA1 card 1</span>
+        </div>
+      </div>
+      <div class="photo-card">
+        <img src="hv_exterior_hv_dept.jpg" alt="HV Dept exterior with fleet">
+        <div class="photo-meta">
+          <div class="photo-id">HV-4</div>
+          <div class="star-row"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star empty">★</span></div>
+          <div class="photo-title">HV Dept Exterior + Customer Fleet</div>
+          <p class="photo-desc">The HV Department building with a full row of commercial fleet vehicles — tankers, rigids, semis. The social proof shot.</p>
+          <span class="use-badge">→ Concept A3 + CA1 card 3</span>
+        </div>
+      </div>
+      <div class="photo-card">
+        <img src="hv_exterior_signage.jpg" alt="HV Dept signage">
+        <div class="photo-meta">
+          <div class="photo-id">HV-5</div>
+          <div class="star-row"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star empty">★</span><span class="star empty">★</span></div>
+          <div class="photo-title">HV Dept Signage + Cement Mixer</div>
+          <p class="photo-desc">Facility exterior with branded wall and cement mixer. Cleaner branding angle — good for Google Display or remarketing.</p>
+          <span class="use-badge">→ Display / remarketing</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="campaign-header">
+      <div class="camp-letter">B</div>
+      <div>
+        <div class="camp-title">Campaign B — Open Day / New Facility</div>
+        <div class="camp-sub">111 images supplied · 9 selected · ranked by ad impact</div>
+      </div>
+    </div>
+
+    <div class="photo-grid">
+      <div class="photo-card">
+        <img src="od_hero_facade.jpg" alt="Grand Opening facade">
+        <div class="photo-meta">
+          <div class="photo-id">OD-1</div>
+          <div class="star-row"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+          <div class="photo-title">Grand Opening — Hero Facade</div>
+          <p class="photo-desc">The best image in the full set. New Core Diesel building — full branded facade, orange band, glass frontage, built-up 4WDs, Grand Opening sign in frame.</p>
+          <span class="use-badge">→ Hero for concept B5</span>
+        </div>
+      </div>
+      <div class="photo-card">
+        <img src="od_ribbon_cut.jpg" alt="Ribbon cut close">
+        <div class="photo-meta">
+          <div class="photo-id">OD-2</div>
+          <div class="star-row"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+          <div class="photo-title">Ribbon Cut — Close Up</div>
+          <p class="photo-desc">Two men laughing at the ribbon cut, branded facility behind them. Warmth + milestone in one frame.</p>
+          <span class="use-badge">→ Concept B1</span>
+        </div>
+      </div>
+      <div class="photo-card">
+        <img src="od_ribbon_wide.jpg" alt="Ribbon cut wide">
+        <div class="photo-meta">
+          <div class="photo-id">OD-3</div>
+          <div class="star-row"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star empty">★</span></div>
+          <div class="photo-title">Ribbon Cut — Wide + Crowd</div>
+          <p class="photo-desc">Wide shot showing the facility, orange balloons, hi-vis staff, and the full crowd gathered. Event scale proof.</p>
+          <span class="use-badge">→ CB1 carousel card 1 or 4</span>
+        </div>
+      </div>
+      <div class="photo-card">
+        <img src="od_triple_m.jpg" alt="Triple M broadcast">
+        <div class="photo-meta">
+          <div class="photo-id">OD-4</div>
+          <div class="star-row"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star empty">★</span></div>
+          <div class="photo-title">Triple M + Ball Bearing Bonanza</div>
+          <p class="photo-desc">Triple M Fraser Coast broadcaster on mic, Ball Bearing Bonanza prize board clearly readable. Dual-use: media credibility + Dyno Tune prize angle.</p>
+          <span class="use-badge">→ Concepts B2 + B3</span>
+        </div>
+      </div>
+      <div class="photo-card">
+        <img src="od_staff_gazebo.jpg" alt="Staff at gazebo" style="aspect-ratio:3/4">
+        <div class="photo-meta">
+          <div class="photo-id">OD-5</div>
+          <div class="star-row"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star empty">★</span></div>
+          <div class="photo-title">Staff Under Core Diesel Gazebo</div>
+          <p class="photo-desc">Young Core Diesel staff member smiling directly at camera under the branded orange gazebo. Direct eye contact = the ad. Most human image in the set.</p>
+          <span class="use-badge">→ Concept B4</span>
+        </div>
+      </div>
+      <div class="photo-card">
+        <img src="od_giveaway_booth.jpg" alt="Giveaway booth">
+        <div class="photo-meta">
+          <div class="photo-id">OD-6</div>
+          <div class="star-row"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star empty">★</span><span class="star empty">★</span></div>
+          <div class="photo-title">Lucky Door Giveaway Booth</div>
+          <p class="photo-desc">Staff at the giveaway table under the Core Diesel marquee, Lucky Door signage and goodie bags. Triple M banners visible. Event energy.</p>
+          <span class="use-badge">→ CB1 carousel card 3</span>
+        </div>
+      </div>
+      <div class="photo-card">
+        <img src="od_jye_crowd.jpg" alt="Jye addressing crowd">
+        <div class="photo-meta">
+          <div class="photo-id">OD-7</div>
+          <div class="star-row"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star empty">★</span></div>
+          <div class="photo-title">Jye Addressing the Crowd</div>
+          <p class="photo-desc">Jye Core speaking to ~12 attendees with the Core Diesel maintenance truck and Mack/UD branding behind him. Founder credibility shot.</p>
+          <span class="use-badge">→ CB1 carousel card 2</span>
+        </div>
+      </div>
+      <div class="photo-card">
+        <img src="od_crowd_event.jpg" alt="Crowd at event">
+        <div class="photo-meta">
+          <div class="photo-id">OD-8</div>
+          <div class="star-row"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star empty">★</span><span class="star empty">★</span></div>
+          <div class="photo-title">Event Crowd Overview</div>
+          <p class="photo-desc">Core Diesel marquee, Triple M 103.5 marquees, multiple attendee groups, event flags. Genuine attendance and energy.</p>
+          <span class="use-badge">→ Warm retargeting</span>
+        </div>
+      </div>
+      <div class="photo-card">
+        <img src="od_customers_facility.jpg" alt="Customers at facility" style="aspect-ratio:3/4">
+        <div class="photo-meta">
+          <div class="photo-id">OD-9</div>
+          <div class="star-row"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star empty">★</span><span class="star empty">★</span></div>
+          <div class="photo-title">Fleet Manager Demographic</div>
+          <p class="photo-desc">Three male business attendees in front of the facility, coffee in hand, natural conversation. The actual commercial fleet manager demographic in the wild.</p>
+          <span class="use-badge">→ Warm audience retargeting</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- CAMPAIGN A PHOTO CONCEPTS                               -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div id="camp-a-concepts">
+    <div class="campaign-header">
+      <div class="camp-letter">A</div>
+      <div>
+        <div class="camp-title">Campaign A — Heavy Vehicle Department</div>
+        <div class="camp-sub">Photo-based concepts · Dave Trott (Predatory Thinking)</div>
+      </div>
+    </div>
+    <div class="section-label">Section 2</div>
+    <h2>Photo-Based Concepts</h2>
+    <div class="note">All photography-based concepts use supplied images. Add copy overlay in Canva/Figma at 1080×1350px (4:5 feed). Logo reserved strip at bottom.</div>
+
+    <div class="concept-grid">
+      <div class="concept-card">
+        <div class="concept-card-header">
+          <span class="concept-id">A1</span>
+          <span class="concept-name">"Only One"</span>
+          <span class="concept-format">Use HV-3</span>
+        </div>
+        <img src="hv_brake_shaker.jpg" alt="A1 concept image" style="aspect-ratio:4/5;object-position:center">
+        <div class="concept-body">
+          <p><strong>Angle:</strong> NHVR credential. The only NHVR-approved Brake Shaker on the Fraser Coast.</p>
+          <p><strong>Overlay:</strong> Dark panel top third. Bold white type: "FRASER COAST'S ONLY / NHVR-APPROVED / BRAKE SHAKER." Orange footer strip for logo.</p>
+          <p><strong>Trott:</strong> The claim is true, specific, and unanswerable. Fleet managers who need NHVR compliance have exactly one local option.</p>
+        </div>
+      </div>
+      <div class="concept-card">
+        <div class="concept-card-header">
+          <span class="concept-id">A2</span>
+          <span class="concept-name">"Cummins on the Floor"</span>
+          <span class="concept-format">Use HV-1</span>
+        </div>
+        <img src="hv_kenworth_engine.jpg" alt="A2 concept image">
+        <div class="concept-body">
+          <p><strong>Angle:</strong> Full engine capability. The rebuild is the proof.</p>
+          <p><strong>Overlay:</strong> Dark overlay top 35%. White + orange type: "WE PULLED IT OUT. / WE REBUILT IT. / WE PUT IT BACK."</p>
+          <p><strong>Trott:</strong> Most diesel ads show a truck in a car park. This shows an engine out of one. Nobody else in the category runs this image.</p>
+        </div>
+      </div>
+      <div class="concept-card">
+        <div class="concept-card-header">
+          <span class="concept-id">A3</span>
+          <span class="concept-name">"What Your Fleet Runs On"</span>
+          <span class="concept-format">Use HV-4</span>
+        </div>
+        <img src="hv_exterior_hv_dept.jpg" alt="A3 concept image">
+        <div class="concept-body">
+          <p><strong>Angle:</strong> Social proof. The fleet row is the ad.</p>
+          <p><strong>Overlay:</strong> Dark gradient bottom half. Editorial headline: "WHAT KEEPS THE FRASER COAST MOVING."</p>
+          <p><strong>Trott:</strong> Fleet operators see other fleets being serviced. If everyone else uses Core Diesel — why doesn't this operator?</p>
+        </div>
+      </div>
+      <div class="concept-card">
+        <div class="concept-card-header">
+          <span class="concept-id">A4</span>
+          <span class="concept-name">"Lift Check"</span>
+          <span class="concept-format">Use HV-2</span>
+        </div>
+        <img src="hv_rotary_lift.jpg" alt="A4 concept image" style="aspect-ratio:4/5;object-position:top">
+        <div class="concept-body">
+          <p><strong>Angle:</strong> Capability + trust. A truck on a hoist is money off the road.</p>
+          <p><strong>Overlay:</strong> Dark gradient lower third. "WHEN IT'S UP HERE — / NOTHING'S CUTTING CORNERS."</p>
+          <p><strong>Trott:</strong> The tension is in the image. The operator trusts whoever is underneath it.</p>
+        </div>
+      </div>
+      <div class="concept-card">
+        <div class="concept-card-header">
+          <span class="concept-id">A5</span>
+          <span class="concept-name">"Authorised Agent"</span>
+          <span class="concept-format">Typographic — no photo</span>
+        </div>
+        <div style="background:#f5f3ee;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;padding:2rem;">
+          <div style="text-align:left;font-family:Arial Black,sans-serif;">
+            <div style="font-size:2.2rem;font-weight:900;color:#1A1A1A;line-height:1.1;">MACK.</div>
+            <div style="font-size:2.2rem;font-weight:900;color:#1A1A1A;line-height:1.1;">UD.</div>
+            <div style="font-size:2.2rem;font-weight:900;color:#1A1A1A;line-height:1.1;margin-bottom:0.75rem;">VOLVO.</div>
+            <div style="height:3px;background:#E8631A;margin-bottom:0.75rem;"></div>
+            <div style="font-size:1rem;font-weight:700;color:#1A1A1A;">AUTHORISED.</div>
+            <div style="font-size:0.7rem;color:#888;margin-top:4px;">Wide Bay's HV service agent</div>
+          </div>
+        </div>
+        <div class="concept-body">
+          <p><strong>Angle:</strong> Credentials as the creative. Three brand names, one word.</p>
+          <p><strong>Trott:</strong> No drama needed — the credentials do the persuasion. Operators with these vehicles know what "authorised agent" means.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- CAMPAIGN A NATIVE FORMATS                               -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div id="camp-a-native">
+    <div class="section-label">Section 3</div>
+    <h2>Native / Image-Free Formats — Campaign A</h2>
+    <div class="note">These formats require no photography. They look like organic feed content and consistently outperform polished ads for cold audiences.</div>
+
+    <div class="native-grid">
+
+      <div class="native-card">
+        <div class="native-card-header">
+          <span class="concept-id">A-N1</span>
+          <span class="concept-name">"The List"</span>
+          <span class="native-format-tag">Notes app</span>
+        </div>
+        <div class="native-card-creative">
+          <div class="notes-frame">
+            <div class="notes-statusbar"><span>9:41</span><span>100%</span></div>
+            <div class="notes-nav">&#8249; Notes</div>
+            <div class="notes-date">Fraser Coast, QLD</div>
+            <div class="notes-title">Why we're the only HV shop operators actually call</div>
+            <div class="notes-body">
+              <div class="notes-item"><span class="notes-bullet">✓</span><span><span class="hi">NHVR-approved</span> Brake Shaker — <strong>only one</strong> on the Fraser Coast</span></div>
+              <div class="notes-item"><span class="notes-bullet">✓</span><span>In-house <span class="hi">Dyno</span> — no need to travel</span></div>
+              <div class="notes-item"><span class="notes-bullet">✓</span><span>Authorised agent: <strong>Mack, UD, Volvo</strong></span></div>
+              <div class="notes-item"><span class="notes-bullet">✓</span><span>Full engine pulls + rebuilds</span></div>
+              <div class="notes-item"><span class="notes-bullet">✓</span><span>Maryborough-based</span></div>
+              <div class="notes-url">corediesel.com.au<span class="notes-cursor"></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="native-card-copy">
+          <p class="copy-primary">Your truck can't afford a workshop that 'gives it a go.' Here's why the Fraser Coast's fleet operators come to Core Diesel.</p>
+          <div class="copy-chips"><span class="chip">Cold · fleet operators</span><span class="chip cta">Get Quote</span></div>
+        </div>
+      </div>
+
+      <div class="native-card">
+        <div class="native-card-header">
+          <span class="concept-id">A-N2</span>
+          <span class="concept-name">"Whiteboard Check"</span>
+          <span class="native-format-tag">Whiteboard comparison</span>
+        </div>
+        <div class="native-card-creative light">
+          <div class="wb-frame">
+            <div class="wb-title">HV workshop — what to check</div>
+            <div class="wb-sub">before you book your rig in anywhere</div>
+            <table class="wb-table">
+              <thead><tr><th class="lbl" style="text-align:left;">Capability</th><th class="us">Core Diesel</th><th class="them">Others</th></tr></thead>
+              <tbody>
+                <tr><td class="lbl">NHVR Brake Shaker</td><td class="win">✓</td><td class="lose">✗</td></tr>
+                <tr><td class="lbl">In-house Dyno</td><td class="win">✓</td><td class="lose">✗</td></tr>
+                <tr><td class="lbl">Auth. Mack/UD/Volvo</td><td class="win">✓</td><td class="lose">✗</td></tr>
+                <tr><td class="lbl">Full engine rebuilds</td><td class="win">✓</td><td class="lose">✗</td></tr>
+                <tr><td class="lbl">Maryborough-based</td><td class="win">✓</td><td style="text-align:center;color:#8a7e6b;">varies</td></tr>
+              </tbody>
+            </table>
+            <div class="wb-foot">corediesel.com.au — The Diesel Professionals</div>
+          </div>
+        </div>
+        <div class="native-card-copy">
+          <p class="copy-primary">Before you book your rig in anywhere on the Fraser Coast — run through this list.</p>
+          <div class="copy-chips"><span class="chip">Fleet managers · cold</span><span class="chip cta">Learn More</span></div>
+        </div>
+      </div>
+
+      <div class="native-card">
+        <div class="native-card-header">
+          <span class="concept-id">A-N3</span>
+          <span class="concept-name">"The Search"</span>
+          <span class="native-format-tag">Fake Google search</span>
+        </div>
+        <div class="native-card-creative">
+          <div class="gs-frame">
+            <div class="gs-bar"><span style="font-size:12px;color:#9aa0a6;">⚲</span><span class="gs-q">NHVR brake shaker test Fraser Coast</span></div>
+            <div class="gs-tabs"><div class="gs-tab on">All</div><div class="gs-tab">Maps</div><div class="gs-tab">Images</div></div>
+            <div class="gs-paa-lbl">People also ask</div>
+            <div class="gs-paa">Where can I get NHVR compliance testing near Maryborough? <span>›</span></div>
+            <div class="gs-paa">Who is the authorised Mack agent in Wide Bay? <span>›</span></div>
+            <div class="gs-result">
+              <div class="gs-url">corediesel.com.au › heavy-vehicle</div>
+              <div class="gs-rtitle">Core Diesel HV Dept — NHVR-Approved Testing, Maryborough QLD</div>
+              <div class="gs-rdesc">Fraser Coast's only NHVR-approved Brake Shaker Test Unit. In-house dyno. Authorised Mack, UD &amp; Volvo agent.</div>
+            </div>
+          </div>
+        </div>
+        <div class="native-card-copy">
+          <p class="copy-primary">When operators search for NHVR compliance testing on the Fraser Coast, there's one answer. That's us.</p>
+          <div class="copy-chips"><span class="chip">Cold · compliance-aware</span><span class="chip cta">Learn More</span></div>
+        </div>
+      </div>
+
+      <div class="native-card">
+        <div class="native-card-header">
+          <span class="concept-id">A-N4</span>
+          <span class="concept-name">"Sent Away Receipt"</span>
+          <span class="native-format-tag">Torn receipt</span>
+        </div>
+        <div class="native-card-creative light">
+          <div class="receipt-frame">
+            <div class="rh">WHAT SENDING YOUR TRUCK<br>TO BRISBANE ACTUALLY COSTS</div>
+            <div class="rs">when there's no NHVR shop locally</div>
+            <hr class="rd">
+            <div class="rr"><span>Tow to Brisbane</span><span>$1,200+</span></div>
+            <div class="rr"><span>Workshop labour</span><span>$4,800+</span></div>
+            <div class="rr"><span>4+ days downtime</span><span>$???</span></div>
+            <div class="rr"><span>Driver dead time</span><span>$???</span></div>
+            <hr class="rd">
+            <div class="rr strike"><span>Total cost</span><span>eye-watering</span></div>
+            <div class="rr orange"><span>Core Diesel, Maryborough</span><span>Local ✓</span></div>
+            <hr class="rd">
+            <div class="rnote">NHVR-approved Brake Shaker · In-house Dyno<br>corediesel.com.au</div>
+          </div>
+        </div>
+        <div class="native-card-copy">
+          <p class="copy-primary">Here's what it costs when your nearest NHVR-approved workshop is in Brisbane. Or you could just come to us in Maryborough.</p>
+          <div class="copy-chips"><span class="chip">Cost-aware · fleet operators</span><span class="chip cta">Get Quote</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- CAMPAIGN A COPY                                         -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div id="camp-a-copy">
+    <div class="section-label">Section 4</div>
+    <h2>Meta Ad Copy — Campaign A</h2>
+    <div class="copy-blocks">
+
+      <div class="copy-block">
+        <div class="copy-block-header"><span class="copy-block-id">A1</span><span class="copy-block-name">"Only One"</span></div>
+        <div class="copy-block-body">
+          <div class="copy-field full"><label>Primary text A</label><p>There's one NHVR-approved Brake Shaker Test Unit on the Fraser Coast. It's ours. If your fleet needs compliance testing, you already know where to bring it.</p></div>
+          <div class="copy-field full"><label>Primary text B</label><p>NHVR compliance isn't optional when you're running commercial fleet. The Fraser Coast's only NHVR-approved Brake Shaker Test Unit is at Core Diesel's Heavy Vehicle Department in Maryborough. Book your test — no long haul required.</p></div>
+          <div class="copy-field"><label>Headline</label><p>Fraser Coast's only NHVR Brake Shaker</p></div>
+          <div class="copy-field"><label>Description</label><p>Heavy Vehicle Department, Maryborough</p></div>
+        </div>
+        <div class="copy-meta-row"><span class="meta-item"><strong>CTA:</strong> Get Quote</span><span class="meta-item"><strong>Audience:</strong> Fleet managers · Fraser Coast</span></div>
+      </div>
+
+      <div class="copy-block">
+        <div class="copy-block-header"><span class="copy-block-id">A2</span><span class="copy-block-name">"Cummins on the Floor"</span></div>
+        <div class="copy-block-body">
+          <div class="copy-field full"><label>Primary text A</label><p>That's a Cummins engine. Out of a Kenworth. On our floor. Not sent away. Not farmed out. Done here.</p></div>
+          <div class="copy-field full"><label>Primary text B</label><p>Full engine pulls. Complete rebuilds. In-house dyno. If you're running heavy diesel and it's not right, bring it to the team that doesn't outsource the hard stuff. Heavy Vehicle Department by Core Diesel, Maryborough.</p></div>
+          <div class="copy-field"><label>Headline</label><p>Full HV engine work. Done in-house.</p></div>
+          <div class="copy-field"><label>Description</label><p>Maryborough's Diesel Professionals</p></div>
+        </div>
+        <div class="copy-meta-row"><span class="meta-item"><strong>CTA:</strong> Learn More</span><span class="meta-item"><strong>Audience:</strong> Owner-operators · HV</span></div>
+      </div>
+
+      <div class="copy-block">
+        <div class="copy-block-header"><span class="copy-block-id">A3</span><span class="copy-block-name">"What Your Fleet Runs On"</span></div>
+        <div class="copy-block-body">
+          <div class="copy-field full"><label>Primary text A</label><p>Most of the Fraser Coast's commercial fleet is already here. Where's yours?</p></div>
+          <div class="copy-field full"><label>Primary text B</label><p>From Isuzus to Kenworths, local fleet operators trust Core Diesel's Heavy Vehicle Department for servicing, compliance, and everything in between. Maryborough-based. Built for the Wide Bay.</p></div>
+          <div class="copy-field"><label>Headline</label><p>The Fraser Coast's fleet workshop</p></div>
+          <div class="copy-field"><label>Description</label><p>Full HV servicing, Maryborough</p></div>
+        </div>
+        <div class="copy-meta-row"><span class="meta-item"><strong>CTA:</strong> Learn More</span><span class="meta-item"><strong>Audience:</strong> Fleet operators · Wide Bay</span></div>
+      </div>
+
+      <div class="copy-block">
+        <div class="copy-block-header"><span class="copy-block-id">A4</span><span class="copy-block-name">"Lift Check"</span></div>
+        <div class="copy-block-body">
+          <div class="copy-field full"><label>Primary text A</label><p>Your truck's up on our hoist. Your driver's waiting. We don't take shortcuts.</p></div>
+          <div class="copy-field full"><label>Primary text B</label><p>Heavy Vehicle servicing isn't a quick lube job. Core Diesel's HV Department runs proper lifts, proper diagnostics, and proper technicians — so when your rig comes back down, it stays on the road. Book your service in Maryborough.</p></div>
+          <div class="copy-field"><label>Headline</label><p>HV servicing done properly</p></div>
+          <div class="copy-field"><label>Description</label><p>Full hoists, full capability</p></div>
+        </div>
+        <div class="copy-meta-row"><span class="meta-item"><strong>CTA:</strong> Book Now</span><span class="meta-item"><strong>Audience:</strong> Commercial operators</span></div>
+      </div>
+
+      <div class="copy-block">
+        <div class="copy-block-header"><span class="copy-block-id">A5</span><span class="copy-block-name">"Authorised Agent"</span></div>
+        <div class="copy-block-body">
+          <div class="copy-field full"><label>Primary text A</label><p>Mack. UD. Volvo. If you're running one of these, you need an authorised agent — not a workshop that'll give it a go. Core Diesel is Wide Bay's authorised service agent for all three.</p></div>
+          <div class="copy-field full"><label>Primary text B</label><p>Wide Bay's authorised service agent for Mack, UD and Volvo trucks. Trained technicians, correct parts, and the documentation your fleet requires. Heavy Vehicle Department by Core Diesel, Maryborough.</p></div>
+          <div class="copy-field"><label>Headline</label><p>Authorised: Mack, UD, Volvo</p></div>
+          <div class="copy-field"><label>Description</label><p>Wide Bay's HV service agent</p></div>
+        </div>
+        <div class="copy-meta-row"><span class="meta-item"><strong>CTA:</strong> Get Quote</span><span class="meta-item"><strong>Audience:</strong> Mack/UD/Volvo owners</span></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- CAMPAIGN B PHOTO CONCEPTS                               -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div id="camp-b-concepts">
+    <div class="campaign-header">
+      <div class="camp-letter">B</div>
+      <div>
+        <div class="camp-title">Campaign B — Open Day / New Facility</div>
+        <div class="camp-sub">Photo-based concepts · Leo Burnett (find the human story)</div>
+      </div>
+    </div>
+    <div class="section-label">Section 5</div>
+    <h2>Photo-Based Concepts</h2>
+
+    <div class="concept-grid">
+      <div class="concept-card">
+        <div class="concept-card-header">
+          <span class="concept-id">B1</span>
+          <span class="concept-name">"The Ribbon"</span>
+          <span class="concept-format">Use OD-2</span>
+        </div>
+        <img src="od_ribbon_cut.jpg" alt="B1 concept">
+        <div class="concept-body">
+          <p><strong>Overlay:</strong> Subtle dark vignette bottom. "CORE DIESEL. / Opening day. Fraser Coast." + italic "Come find out what all the fuss is about."</p>
+          <p><strong>Burnett:</strong> Two blokes laughing at a ribbon cut with a serious facility behind them — the whole brand story in one frame.</p>
+        </div>
+      </div>
+      <div class="concept-card">
+        <div class="concept-card-header">
+          <span class="concept-id">B2</span>
+          <span class="concept-name">"The Dyno Tune"</span>
+          <span class="concept-format">Use OD-4</span>
+        </div>
+        <img src="od_triple_m.jpg" alt="B2 concept">
+        <div class="concept-body">
+          <p><strong>Overlay:</strong> Dark overlay upper half for type. "OUR EVERYDAY SERVICE / WAS THE MAJOR PRIZE." + "A Dyno Tune is what we do on a Tuesday."</p>
+          <p><strong>Burnett:</strong> Quiet confidence. A Dyno Tune as the major prize signals Core Diesel's everyday capability without a single brag.</p>
+        </div>
+      </div>
+      <div class="concept-card">
+        <div class="concept-card-header">
+          <span class="concept-id">B3</span>
+          <span class="concept-name">"Triple M Was Here"</span>
+          <span class="concept-format">Use OD-4</span>
+        </div>
+        <img src="od_triple_m.jpg" alt="B3 concept">
+        <div class="concept-body">
+          <p><strong>Overlay:</strong> "TRIPLE M CAME TO OUR OPENING." + "They don't go everywhere."</p>
+          <p><strong>Burnett:</strong> Third-party endorsement told with warmth. The media presence legitimises the event without Core Diesel claiming it themselves.</p>
+        </div>
+      </div>
+      <div class="concept-card">
+        <div class="concept-card-header">
+          <span class="concept-id">B4</span>
+          <span class="concept-name">"Staff Pick"</span>
+          <span class="concept-format">Use OD-5</span>
+        </div>
+        <img src="od_staff_gazebo.jpg" alt="B4 concept" style="aspect-ratio:4/5;object-position:top">
+        <div class="concept-body">
+          <p><strong>Overlay:</strong> Minimal. "The team behind the Fraser Coast's fleet." Bottom: "corediesel.com.au"</p>
+          <p><strong>Burnett:</strong> Direct eye contact is the ad. Faces sell. A real person in Core Diesel gear, clearly proud of the day.</p>
+        </div>
+      </div>
+      <div class="concept-card">
+        <div class="concept-card-header">
+          <span class="concept-id">B5</span>
+          <span class="concept-name">"Facility Reveal"</span>
+          <span class="concept-format">Use OD-1 · HERO SHOT</span>
+        </div>
+        <img src="od_hero_facade.jpg" alt="B5 concept">
+        <div class="concept-body">
+          <p><strong>Overlay:</strong> Dark gradient bottom third. "THIS IS WHAT WE BUILT / FOR THE WIDE BAY." + "Core Diesel. Heavy Vehicle Department. Maryborough, QLD."</p>
+          <p><strong>Burnett:</strong> Pride in place. The facility is the character. Best image in the full set.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- CAMPAIGN B NATIVE FORMATS                               -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div id="camp-b-native">
+    <div class="section-label">Section 6</div>
+    <h2>Native / Image-Free Formats — Campaign B</h2>
+
+    <div class="native-grid">
+
+      <div class="native-card">
+        <div class="native-card-header">
+          <span class="concept-id">B-N1</span>
+          <span class="concept-name">"Dear Operators"</span>
+          <span class="native-format-tag">Open letter</span>
+        </div>
+        <div class="native-card-creative light">
+          <div class="letter-frame">
+            <div class="ltopbar"></div>
+            <div class="ltag">Open letter from Core Diesel</div>
+            <div class="lsal">Dear Wide Bay operators,</div>
+            <div class="lbody"><p>We opened our doors this month. And the Fraser Coast showed up.</p></div>
+            <div class="lbody"><p>Triple M broadcast live from our yard. <span class="lhi">The major prize in our draw was a Dyno Tune.</span> <span class="lside">(Because that's just a normal Tuesday for us.)</span></p></div>
+            <div class="lbody"><p>We built the HV Department because this region's commercial fleet operators deserve a proper workshop. NHVR-approved. Authorised Mack, UD, and Volvo service agent. In-house dyno.</p></div>
+            <div class="lbody"><p><span class="lhi">Your fleet belongs here.</span></p></div>
+            <div class="lsig">
+              <div class="lsig-name">Jye Core</div>
+              <div class="lsig-title">Director, Core Diesel · corediesel.com.au</div>
+            </div>
+          </div>
+        </div>
+        <div class="native-card-copy">
+          <p class="copy-primary">We opened. The region showed up. Now it's your turn.</p>
+          <div class="copy-chips"><span class="chip">Warm + cold</span><span class="chip cta">Learn More</span></div>
+        </div>
+      </div>
+
+      <div class="native-card">
+        <div class="native-card-header">
+          <span class="concept-id">B-N2</span>
+          <span class="concept-name">"Open Day Highlights"</span>
+          <span class="native-format-tag">Sticky notes</span>
+        </div>
+        <div class="native-card-creative">
+          <div class="sticky-board">
+            <div class="sticky-board-title">Core Diesel — Open Day</div>
+            <div class="sticky-grid">
+              <div class="sticky y" style="transform:rotate(-2deg)"><div class="sticky-head">Triple M were there</div>live remote on the day</div>
+              <div class="sticky b" style="transform:rotate(1.5deg)"><div class="sticky-head">Major prize?</div>A Dyno Tune. That's our Tuesday.</div>
+              <div class="sticky o" style="transform:rotate(-1deg)"><div class="sticky-head">Ribbon cut ✓</div>HV Dept officially open</div>
+              <div class="sticky g" style="transform:rotate(2deg)"><div class="sticky-head">Fraser Coast came out</div>fleet operators, tradies, locals</div>
+            </div>
+            <div class="sticky-foot">corediesel.com.au — The Diesel Professionals</div>
+          </div>
+        </div>
+        <div class="native-card-copy">
+          <p class="copy-primary">Our opening day summed up on four sticky notes. Come find out what all the fuss was about.</p>
+          <div class="copy-chips"><span class="chip">Warm audience</span><span class="chip cta">Learn More</span></div>
+        </div>
+      </div>
+
+      <div class="native-card">
+        <div class="native-card-header">
+          <span class="concept-id">B-N3</span>
+          <span class="concept-name">"Heard About Core Diesel?"</span>
+          <span class="native-format-tag">iMessage thread</span>
+        </div>
+        <div class="native-card-creative">
+          <div class="imsg-frame">
+            <div class="imsg-status"><span>9:41</span><span>100%</span></div>
+            <div class="imsg-header">
+              <span class="imsg-back">‹</span>
+              <div class="imsg-avatar">M</div>
+              <div class="imsg-name">Macca</div>
+            </div>
+            <div class="imsg-ts">Opening Day</div>
+            <div class="imsg-them">Went to the Core Diesel opening. Triple M was there and everything</div>
+            <div class="imsg-them">Major prize in the draw was a free dyno tune lol</div>
+            <div class="imsg-me">Serious? Where are they?</div>
+            <div class="imsg-them">Maryborough. Heavy Vehicle Dept. NHVR testing, dyno, the lot</div>
+            <div class="imsg-them">Only NHVR brake shaker on the Fraser Coast apparently</div>
+            <div class="imsg-me">Booking my rig in</div>
+            <div class="imsg-read">Read</div>
+            <div class="imsg-home"></div>
+          </div>
+        </div>
+        <div class="native-card-copy">
+          <p class="copy-primary">Word travels fast. The Fraser Coast's fleet operators are already talking about Core Diesel's Heavy Vehicle Department. Are you?</p>
+          <div class="copy-chips"><span class="chip">Cold audience</span><span class="chip cta">Learn More</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- CAMPAIGN B COPY                                         -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div id="camp-b-copy">
+    <div class="section-label">Section 7</div>
+    <h2>Meta Ad Copy — Campaign B</h2>
+    <div class="copy-blocks">
+
+      <div class="copy-block">
+        <div class="copy-block-header"><span class="copy-block-id">B1</span><span class="copy-block-name">"The Ribbon"</span></div>
+        <div class="copy-block-body">
+          <div class="copy-field full"><label>Primary text A</label><p>We cut the ribbon. The Fraser Coast showed up. Now come find out what all the fuss is about.</p></div>
+          <div class="copy-field full"><label>Primary text B</label><p>Core Diesel's opening day was everything we hoped it would be. Triple M Fraser Coast broadcast live. Lucky door giveaways. The region's fleet operators out in force. If you missed it — the doors are open. Maryborough's diesel professionals are ready for your truck.</p></div>
+          <div class="copy-field"><label>Headline</label><p>Core Diesel — Open for business</p></div>
+          <div class="copy-field"><label>Description</label><p>Maryborough, Fraser Coast</p></div>
+        </div>
+        <div class="copy-meta-row"><span class="meta-item"><strong>CTA:</strong> Learn More</span><span class="meta-item"><strong>Audience:</strong> Warm + cold · Fraser Coast</span></div>
+      </div>
+
+      <div class="copy-block">
+        <div class="copy-block-header"><span class="copy-block-id">B2</span><span class="copy-block-name">"The Dyno Tune"</span></div>
+        <div class="copy-block-body">
+          <div class="copy-field full"><label>Primary text A</label><p>We gave away a Dyno Tune as a major prize at our opening. That's just a Tuesday here.</p></div>
+          <div class="copy-field full"><label>Primary text B</label><p>At Core Diesel's opening day, the Ball Bearing Bonanza's top prize was a Dyno Tune on our in-house dyno. We thought that seemed about right. Come and see what we do the other 364 days of the year. Heavy Vehicle Department, Maryborough.</p></div>
+          <div class="copy-field"><label>Headline</label><p>Our Tuesday is someone else's prize</p></div>
+          <div class="copy-field"><label>Description</label><p>In-house Dyno. HV Department.</p></div>
+        </div>
+        <div class="copy-meta-row"><span class="meta-item"><strong>CTA:</strong> Learn More</span><span class="meta-item"><strong>Audience:</strong> Cold · service-aware</span></div>
+      </div>
+
+      <div class="copy-block">
+        <div class="copy-block-header"><span class="copy-block-id">B3</span><span class="copy-block-name">"Triple M Was Here"</span></div>
+        <div class="copy-block-body">
+          <div class="copy-field full"><label>Primary text A</label><p>Triple M Fraser Coast broadcast live from our opening. We'll take it.</p></div>
+          <div class="copy-field full"><label>Primary text B</label><p>When Core Diesel opened the Heavy Vehicle Department, Triple M Fraser Coast 103.5 came out to do a live remote. Lucky door prizes. Ball Bearing Bonanza. Precision Hydraulics on deck. The region's commercial fleet operators know where the Diesel Professionals are. Do you?</p></div>
+          <div class="copy-field"><label>Headline</label><p>Triple M came to our opening</p></div>
+          <div class="copy-field"><label>Description</label><p>Fraser Coast's HV Department</p></div>
+        </div>
+        <div class="copy-meta-row"><span class="meta-item"><strong>CTA:</strong> Learn More</span><span class="meta-item"><strong>⚠ Confirm Triple M clearance first</strong></span></div>
+      </div>
+
+      <div class="copy-block">
+        <div class="copy-block-header"><span class="copy-block-id">B4</span><span class="copy-block-name">"Staff Pick"</span></div>
+        <div class="copy-block-body">
+          <div class="copy-field full"><label>Primary text A</label><p>These are the people looking after the Fraser Coast's commercial fleet. Good team.</p></div>
+          <div class="copy-field full"><label>Primary text B</label><p>Behind every truck that leaves Core Diesel's Heavy Vehicle Department is a team that takes it seriously. NHVR-approved. Authorised Mack, UD, Volvo service agent. In-house dyno. And clearly, people who know how to put on a proper opening day. Come and meet us.</p></div>
+          <div class="copy-field"><label>Headline</label><p>The team behind your fleet</p></div>
+          <div class="copy-field"><label>Description</label><p>Heavy Vehicle Dept, Maryborough</p></div>
+        </div>
+        <div class="copy-meta-row"><span class="meta-item"><strong>CTA:</strong> Learn More</span><span class="meta-item"><strong>Audience:</strong> Cold · community</span></div>
+      </div>
+
+      <div class="copy-block">
+        <div class="copy-block-header"><span class="copy-block-id">B5</span><span class="copy-block-name">"Facility Reveal"</span></div>
+        <div class="copy-block-body">
+          <div class="copy-field full"><label>Primary text A</label><p>This is what we've built for the Wide Bay. Come and see what's inside.</p></div>
+          <div class="copy-field full"><label>Primary text B</label><p>The new Core Diesel Heavy Vehicle Department in Maryborough is the Fraser Coast's most capable HV facility. NHVR-approved testing. In-house dyno. Full hoists for the biggest rigs. Authorised agent for Mack, UD and Volvo. We built it for the region. Now bring us your fleet.</p></div>
+          <div class="copy-field"><label>Headline</label><p>Core Diesel — Wide Bay's HV home</p></div>
+          <div class="copy-field"><label>Description</label><p>Maryborough, QLD</p></div>
+        </div>
+        <div class="copy-meta-row"><span class="meta-item"><strong>CTA:</strong> Learn More</span><span class="meta-item"><strong>Audience:</strong> Cold · Wide Bay</span></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- COMPLIANCE                                              -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div id="compliance">
+    <div class="section-label">Section 8</div>
+    <h2>Compliance Notes</h2>
+    <div class="compliance-grid">
+      <div class="compliance-card">
+        <h3>Campaign A — HV Department</h3>
+        <ul class="compliance-list">
+          <li>NHVR claim scoped to Brake Shaker Test Unit only — confirmed in SoT</li>
+          <li>Authorised agent claim (Mack/UD/Volvo) confirmed in SoT. Copy says "authorised agent" only — no warranty safety implied</li>
+          <li>Fleet percentage (~90%) avoided in all copy. "Trusted by" framing used instead — confirm with Jye before adding specific figures</li>
+          <li>No tuning/ECU remapping referenced. Warranty blacklist not triggered</li>
+          <li>No outcome claims, no fake urgency, no before/after imagery</li>
+        </ul>
+      </div>
+      <div class="compliance-card">
+        <h3>Campaign B — Open Day</h3>
+        <ul class="compliance-list">
+          <li class="warn">Triple M Fraser Coast: confirm they're comfortable being named in paid ads before running B3 or CB1 card 2</li>
+          <li class="warn">Precision Hydraulics: confirm partner clearance before naming in paid ads</li>
+          <li>Ball Bearing Bonanza / Dyno Tune: copy uses past tense throughout. Clean.</li>
+          <li class="flag">New vs expanded facility: confirm with Jye — if expansion not new build, update "new facility" to "expanded facility" across B5 and CB1</li>
+          <li class="flag">Children in photos (Core Diesel hoodies): do not use in paid ads without parental consent</li>
+        </ul>
+      </div>
+      <div class="compliance-card">
+        <h3>Before generating any AI imagery</h3>
+        <ul class="compliance-list">
+          <li class="flag">Brand orange #E8631A inferred from photography — confirm exact hex with Jye/Bronte before generating. Update all prompts if different.</li>
+          <li class="flag">Fonts: prompts reference "Barlow Condensed Bold" as a display match. Confirm the actual font used on Core Diesel signage.</li>
+          <li>All quoted on-image text strings are compliant as written — if edited in Canva/Figma, recheck against the blacklist before publishing</li>
+        </ul>
+      </div>
+      <div class="compliance-card">
+        <h3>Legend</h3>
+        <ul class="compliance-list">
+          <li>Clean — confirmed, no action needed</li>
+          <li class="warn" style="list-style:none">⚠ Needs confirmation before running</li>
+          <li class="flag" style="list-style:none">⚑ Flagged — check or update before generating</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    Prepared by Hilda — Hedgehog Marketing AI · June 2026<br>
+    For review by Guy Abelsohn (campaigns) and Bronte Taylor (social)
+  </div>
+
+</div>
+
+<a href="#top" class="back-to-top" id="btt">↑</a>
+
+<script>
+  const btt = document.getElementById('btt');
+  window.addEventListener('scroll', () => {
+    btt.classList.toggle('visible', window.scrollY > 400);
+  });
+
+  // Active nav highlighting
+  const sections = document.querySelectorAll('[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navLinks.forEach(a => {
+          a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id);
+        });
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
